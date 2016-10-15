@@ -65,9 +65,9 @@ public class RegisterActivity extends AppCompatActivity {
         // register
 
         // Casey made this change here
-//        createAccount(editEmail.getText().toString(), editPassword.getText().toString());
-        Intent goToGroup = new Intent(RegisterActivity.this, GroupActivity.class);
-        startActivity(goToGroup);
+        createAccount(editEmail.getText().toString(), editPassword.getText().toString());
+        //Intent goToGroup = new Intent(RegisterActivity.this, GroupActivity.class);
+        //startActivity(goToGroup);
     }
 
     @Override
@@ -104,8 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(RegisterActivity.this, "Registration Successful!",
                                     Toast.LENGTH_SHORT).show();
-                            //Intent goToGroup = new Intent(RegisterActivity.this, GroupActivity.class);
-                            //startActivity(goToGroup);
+                            Intent goToGroup = new Intent(RegisterActivity.this, GroupActivity.class);
+                            startActivity(goToGroup);
 
                         }
 
@@ -117,3 +117,5 @@ public class RegisterActivity extends AppCompatActivity {
         // [END create_user_with_email]
     }
 }
+
+
