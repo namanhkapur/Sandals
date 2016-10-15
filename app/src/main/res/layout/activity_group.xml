@@ -43,7 +43,7 @@
     <ListView
         android:id="@+id/myGroups"
         android:layout_width="match_parent"
-        android:layout_height="503dp" />
+        android:layout_height="1007dp" />
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -27,13 +27,8 @@ public class NewsFeed extends Activity {
     }
 
     private void populateUsers() {
-<<<<<<< Updated upstream
-        People Bob = new People("Bob", 0);
-        People Alice = new People("Alice", 2);
-=======
         People Bob = new People("Bob");
         People Alice = new People("Alice");
->>>>>>> Stashed changes
         addUser(Bob);
         addUser(Alice);
     }
