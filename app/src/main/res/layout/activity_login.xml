@@ -76,7 +76,7 @@
 
             <TextView
                 android:text="Register Here"
-                android:layout_width="208dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textviewRegisterHere" />
 
