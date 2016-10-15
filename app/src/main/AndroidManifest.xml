@@ -27,11 +27,9 @@
             android:name=".Group"
             android:label="@string/title_activity_group"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".UserAreaActivity"></activity>
+        <activity android:name=".UserAreaActivity" />
+        <activity android:name=".LoginNew"></activity>
     </application>
 
 </manifest>
