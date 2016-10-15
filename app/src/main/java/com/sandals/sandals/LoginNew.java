@@ -1,6 +1,8 @@
 package com.sandals.sandals;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -81,6 +83,10 @@ public class LoginNew extends AppCompatActivity {
 
                             Toast.makeText(LoginNew.this, "Logged In!",
                                     Toast.LENGTH_SHORT).show();
+                            SharedPreferences sharedPref = LoginNew.this.getPreferences(Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putBoolean("isLoggedIn", true);
+                            editor.commit();
                             Intent groupIntent = new Intent(LoginNew.this, GroupActivity.class);
                             startActivity(groupIntent);
                         }

@@ -1,6 +1,8 @@
 package com.sandals.sandals;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -106,6 +108,11 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             //Intent goToGroup = new Intent(RegisterActivity.this, GroupActivity.class);
                             //startActivity(goToGroup);
+                            SharedPreferences sharedPref = RegisterActivity.this.getPreferences(Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putBoolean("isRegistered", true);
+                            editor.commit();
+
                         }
 
                         // [START_EXCLUDE]

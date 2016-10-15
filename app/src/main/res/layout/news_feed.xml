@@ -14,7 +14,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/p1"
+        app:srcCompat="@mipmap/ic_launcher"
         android:id="@+id/p1_icon"
         android:maxHeight="100dp"
         android:maxWidth="100dp"
