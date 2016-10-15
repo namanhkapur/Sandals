@@ -4,14 +4,32 @@ package com.sandals.sandals;
  * Created by namanh on 10/15/2016.
  */
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
-public class NewsFeed extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class NewsFeed extends Activity {
+
+    private List<People> users = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
+
+        populateUsers();
     }
 
+    private void populateUsers() {
+        People Bob = new People("Bob", 0);
+        People Alice = new People("Alice", 2);
+        addUser(Bob);
+        addUser(Alice);
+    }
+
+    public void addUser(People person) {
+        users.add(person);
+    }
 }
