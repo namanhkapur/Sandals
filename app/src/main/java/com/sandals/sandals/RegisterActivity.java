@@ -26,14 +26,17 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        editEmail = (EditText) findViewById(R.id.editEmail);
-        editPassword = (EditText) findViewById(R.id.editPassword);
+
 
         mAuth = FirebaseAuth.getInstance();
 
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_register2);
+
+        editEmail = (EditText) findViewById(R.id.editEmail);
+        editPassword = (EditText) findViewById(R.id.editPassword);
         Button regButton = (Button) findViewById(R.id.buttonRegister);
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
