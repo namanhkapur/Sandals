@@ -46,8 +46,11 @@ import java.util.Map;
 
 public class GroupActivity extends AppCompatActivity {
 
+    ListView myGroups;
     ArrayList<HashMap<String, Object>> groupsData;
     HashSet<Group> allGroups = new HashSet<>();
+    private EditText editGroupName;
+    private boolean hasImported = false;
 
     private ArrayList<String> list = new ArrayList<>();
 
@@ -72,15 +75,21 @@ public class GroupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(GroupActivity.this);
                 builder.setTitle(R.string.create_new_group);
-                final EditText editGroupName = new EditText(GroupActivity.this);
+                editGroupName = new EditText(GroupActivity.this);
                 builder.setView(editGroupName);
 
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK button
-
+                        Group newGroup = new Group(editGroupName.getText().toString());
+                        allGroups.add(newGroup);
+                        list.add(0, newGroup.getName());
+                        ArrayAdapter adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_1, list);
+                        myGroups = (ListView) findViewById(R.id.myGroups);
+                        myGroups.setAdapter(adapter);
                     }
                 });
+
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
@@ -102,7 +111,24 @@ public class GroupActivity extends AppCompatActivity {
 
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        if (hasImported) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(GroupActivity.this);
+                            builder.setTitle(R.string.already_imported);
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+
+                            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User acknowledgement
+
+                                }
+                            });
+
+                            return;
+                        }
+
                         // User wants to import!
+                        hasImported = true;
                         HttpResponse response;
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                         StrictMode.setThreadPolicy(policy);
@@ -145,7 +171,6 @@ public class GroupActivity extends AppCompatActivity {
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
-
                     }
                 });
 
@@ -165,7 +190,6 @@ public class GroupActivity extends AppCompatActivity {
         People member;
         HashMap<String, Object> g;
         ArrayList<HashMap<String, Object>> groupMembers;
-        ListView myGroups = (ListView) findViewById(R.id.myGroups);
         Iterator<HashMap<String, Object>> groups = groupsData.iterator();
 
         while (groups.hasNext()) {
@@ -189,7 +213,8 @@ public class GroupActivity extends AppCompatActivity {
             allGroups.add(addGroup);
             list.add((String) g.get("name"));
         }
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+        myGroups =  (ListView) findViewById(R.id.myGroups);
+        ArrayAdapter adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_1, list);
         myGroups.setAdapter(adapter);
     }
 
