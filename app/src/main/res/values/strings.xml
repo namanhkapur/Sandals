@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Sandals</string>
     <string name="action_settings">Settings</string>
+    <string name="create_new_group">Create New Group</string>
+    <string name="ok">Okay</string>
+    <string name="cancel">Cancel</string>
 </resources>
