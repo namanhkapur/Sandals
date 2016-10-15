@@ -31,6 +31,15 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_dialog_email"
+        app:backgroundTint="@android:color/holo_blue_light" />
+
     <ListView
         android:id="@+id/groups"
         android:layout_width="match_parent"
