@@ -1,10 +1,10 @@
 package com.sandals.sandals;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -30,11 +30,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class GroupActivity extends AppCompatActivity {
+
+    ArrayList<HashMap<String, String>> groupsData;
+
+    HashSet<Group> allGroups;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +87,7 @@ public class GroupActivity extends AppCompatActivity {
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User wants to import!
-                        HttpResponse response = null;
+                        HttpResponse response;
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                         StrictMode.setThreadPolicy(policy);
                         try {
@@ -91,17 +96,23 @@ public class GroupActivity extends AppCompatActivity {
 
                             // Casey: 4c87fed074db013488c2001f5e6f38da
                             // Kevin: kQeWcJ58iUzUc3pjB67MB7ClKTwrjSAwpkXVJ9SO
+
+                            // Requesting data!
                             request.setURI(new URI("https://api.groupme.com/v3/groups?token=kQeWcJ58iUzUc3pjB67MB7ClKTwrjSAwpkXVJ9SO"));
                             response = client.execute(request);
                             String data = convertStreamToString(response.getEntity().getContent());
                             JSONObject json = new JSONObject(data);
-                            Map<String, Object> retMap = new HashMap<String, Object>();
+                            Map<String, Object> retMap = new HashMap<>();
 
-                            if (json != JSONObject.NULL) {
+                            if(json != JSONObject.NULL) {
                                 retMap = toMap(json);
                             }
 
-                            System.out.println(json);
+                            // Pulls all groups!
+                            groupsData = (ArrayList<HashMap<String, String>>) retMap.get("response");
+
+                            // Create groups
+                            createGroups();
 
                         } catch (URISyntaxException e) {
                             e.printStackTrace();
@@ -130,13 +141,23 @@ public class GroupActivity extends AppCompatActivity {
 
     }
 
-    public static String convertStreamToString(InputStream inputStream) throws IOException {
+    private void createGroups() {
+        HashMap<String, String> g;
+        Iterator<HashMap<String, String>> groups = groupsData.iterator();
+        while (groups.hasNext()) {
+            g = groups.next();
+            System.out.println(g);
+        }
+    }
+
+
+    private static String convertStreamToString(InputStream inputStream) throws IOException {
         if (inputStream != null) {
             Writer writer = new StringWriter();
 
             char[] buffer = new char[1024];
             try {
-                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 1024);
+                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"),1024);
                 int n;
                 while ((n = reader.read(buffer)) != -1) {
                     writer.write(buffer, 0, n);
@@ -150,17 +171,19 @@ public class GroupActivity extends AppCompatActivity {
         }
     }
 
-    public static Map<String, Object> toMap(JSONObject object) throws JSONException {
+    private static Map<String, Object> toMap(JSONObject object) throws JSONException {
         Map<String, Object> map = new HashMap<>();
 
         Iterator<String> keysItr = object.keys();
-        while (keysItr.hasNext()) {
+        while(keysItr.hasNext()) {
             String key = keysItr.next();
             Object value = object.get(key);
 
-            if (value instanceof JSONArray) {
+            if(value instanceof JSONArray) {
                 value = toList((JSONArray) value);
-            } else if (value instanceof JSONObject) {
+            }
+
+            else if(value instanceof JSONObject) {
                 value = toMap((JSONObject) value);
             }
             map.put(key, value);
@@ -168,13 +191,15 @@ public class GroupActivity extends AppCompatActivity {
         return map;
     }
 
-    public static List<Object> toList(JSONArray array) throws JSONException {
-        List<Object> list = new ArrayList<Object>();
-        for (int i = 0; i < array.length(); i++) {
+    private static List<Object> toList(JSONArray array) throws JSONException {
+        List<Object> list = new ArrayList<>();
+        for(int i = 0; i < array.length(); i++) {
             Object value = array.get(i);
-            if (value instanceof JSONArray) {
+            if(value instanceof JSONArray) {
                 value = toList((JSONArray) value);
-            } else if (value instanceof JSONObject) {
+            }
+
+            else if(value instanceof JSONObject) {
                 value = toMap((JSONObject) value);
             }
             list.add(value);
