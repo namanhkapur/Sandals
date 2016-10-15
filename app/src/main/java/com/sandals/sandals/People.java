@@ -29,7 +29,7 @@ public class People {
         return name;
     }
 
-    private void setMood(int mood) {
+    public void setMood(int mood) {
         feeling = mood;
 
         switch (feeling) {
