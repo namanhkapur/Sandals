@@ -43,10 +43,10 @@ public class People {
                 string_feeling = "Nervous";
                 break;
             case 3:
-                string_feeling = "Surprise";
+                string_feeling = "Surprised";
                 break;
             case 4:
-                string_feeling = "Trust";
+                string_feeling = "Excited";
                 break;
             case 5:
                 string_feeling = "Confused";
