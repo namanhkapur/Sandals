@@ -2,6 +2,7 @@ package com.sandals.sandals;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -24,27 +25,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle(R.string.create_new_group);
-                final EditText editGroupName = new EditText(MainActivity.this);
-                builder.setView(editGroupName);
-
-                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button
-
-                    }
-                });
-                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-
-                    }
-                });
-
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-
+                Intent transitionToGroups = new Intent(MainActivity.this, Group.class);
+                startActivity(transitionToGroups);
             }
         });
     }
