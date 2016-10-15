@@ -4,4 +4,5 @@
     <string name="create_new_group">Create New Group</string>
     <string name="ok">Okay</string>
     <string name="cancel">Cancel</string>
+    <string name="title_activity_group">Group</string>
 </resources>
