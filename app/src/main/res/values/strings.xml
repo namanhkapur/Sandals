@@ -6,7 +6,7 @@
     <string name="import_from_group_me">Import From GroupMe?</string>
     <string name="ok">Okay</string>
     <string name="cancel">Cancel</string>
-    <string name="title_activity_group">Group</string>
+    <string name="title_activity_group">My Groups</string>
     <string name="title_activity_register">Sign in</string>
 
     <!-- Strings related to login -->

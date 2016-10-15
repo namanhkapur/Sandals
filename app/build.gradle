@@ -30,8 +30,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     testCompile 'junit:junit:4.12'
-    apply plugin: 'com.google.gms.google-services'
+
     compile 'com.google.firebase:firebase-auth:9.6.1'
     compile 'org.apache.httpcomponents:httpcore:4.4.1'
     compile 'org.apache.httpcomponents:httpclient:4.5'
+    compile 'com.google.android.gms:play-services-appindexing:9.6.1'
+    apply plugin: 'com.google.gms.google-services'
 }

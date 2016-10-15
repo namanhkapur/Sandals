@@ -10,16 +10,17 @@ public class People {
     public int feeling;
     public String string_feeling;
     public String status;
-    private int iconID;
-    private String email;
+    public int userID;
+    public String iconID;
+    public String email;
 
-    public People(String name, int feeling) {
+    public People(String name) {
         this.name = name;
-        this.feeling = feeling;
         this.string_feeling = "";
         this.status = "";
-        this.iconID = 0;
     }
+
+    public void setFeeling(int f) { feeling = f; }
 
     public void setEmail(String e) { email = e; }
 
@@ -77,12 +78,15 @@ public class People {
         return status;
     }
 
+    public void setUserID(int u) { userID = u; }
+
     // for picture capability
-    public void setIconID(int picture) {
+    public void setIconID(String picture) {
         iconID = picture;
     }
 
-    public int getIconID() {
+    public String getIconID() {
         return iconID;
     }
+
 }

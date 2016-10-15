@@ -1,14 +1,22 @@
 package com.sandals.sandals;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -37,9 +45,14 @@ import java.util.Map;
 
 public class GroupActivity extends AppCompatActivity {
 
+    ArrayAdapter<Integer> adapter;
     ArrayList<HashMap<String, Object>> groupsData;
-
-    HashSet<Group> allGroups;
+    HashSet<Group> allGroups = new HashSet<>();
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +117,7 @@ public class GroupActivity extends AppCompatActivity {
                             JSONObject json = new JSONObject(data);
                             Map<String, Object> retMap = new HashMap<>();
 
-                            if(json != JSONObject.NULL) {
+                            if (json != JSONObject.NULL) {
                                 retMap = toMap(json);
                             }
 
@@ -139,6 +152,9 @@ public class GroupActivity extends AppCompatActivity {
             }
         });
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void createGroups() {
@@ -146,19 +162,35 @@ public class GroupActivity extends AppCompatActivity {
         People member;
         HashMap<String, Object> g;
         ArrayList<HashMap<String, Object>> groupMembers;
+        ListView myGroups = (ListView) findViewById(R.id.myGroups);
         Iterator<HashMap<String, Object>> groups = groupsData.iterator();
+
+        int count = 0;
+        Integer[] groupIds = new Integer[groupsData.size()];
         while (groups.hasNext()) {
             g = groups.next();
             addGroup = new Group((String) g.get("name"));
-            addGroup.setImage((String) g.get("image_url"));
+            if (!g.get("image_url").equals(null)) {
+                addGroup.setImage((String) g.get("image_url"));
+            }
             addGroup.setGroupId(Integer.parseInt((String) g.get("group_id")));
             groupMembers = (ArrayList<HashMap<String, Object>>) g.get("members");
             addGroup.setMembersSize(groupMembers.size());
             for (HashMap<String, Object> p : groupMembers) {
-
+                member = new People((String) p.get("nickname"));
+                if (!p.get("image_url").equals(null)) {
+                    member.setIconID((String) p.get("image_url"));
+                }
+                member.setUserID(Integer.parseInt((String) p.get(
+                        "user_id")));
+                addGroup.addMember(member);
             }
-            System.out.println(g);
+            allGroups.add(addGroup);
+            groupIds[count] = (Integer) g.get("ground_id");
+            count += 1;
         }
+        adapter = new ArrayAdapter<>(GroupActivity.this, R.layout.activity_group, groupIds);
+        myGroups.setAdapter(adapter);
     }
 
 
@@ -168,7 +200,7 @@ public class GroupActivity extends AppCompatActivity {
 
             char[] buffer = new char[1024];
             try {
-                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"),1024);
+                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 1024);
                 int n;
                 while ((n = reader.read(buffer)) != -1) {
                     writer.write(buffer, 0, n);
@@ -186,15 +218,13 @@ public class GroupActivity extends AppCompatActivity {
         Map<String, Object> map = new HashMap<>();
 
         Iterator<String> keysItr = object.keys();
-        while(keysItr.hasNext()) {
+        while (keysItr.hasNext()) {
             String key = keysItr.next();
             Object value = object.get(key);
 
-            if(value instanceof JSONArray) {
+            if (value instanceof JSONArray) {
                 value = toList((JSONArray) value);
-            }
-
-            else if(value instanceof JSONObject) {
+            } else if (value instanceof JSONObject) {
                 value = toMap((JSONObject) value);
             }
             map.put(key, value);
@@ -204,13 +234,11 @@ public class GroupActivity extends AppCompatActivity {
 
     private static List<Object> toList(JSONArray array) throws JSONException {
         List<Object> list = new ArrayList<>();
-        for(int i = 0; i < array.length(); i++) {
+        for (int i = 0; i < array.length(); i++) {
             Object value = array.get(i);
-            if(value instanceof JSONArray) {
+            if (value instanceof JSONArray) {
                 value = toList((JSONArray) value);
-            }
-
-            else if(value instanceof JSONObject) {
+            } else if (value instanceof JSONObject) {
                 value = toMap((JSONObject) value);
             }
             list.add(value);
@@ -218,4 +246,39 @@ public class GroupActivity extends AppCompatActivity {
         return list;
     }
 
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Group Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
+    }
 }

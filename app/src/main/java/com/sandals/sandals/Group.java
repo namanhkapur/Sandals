@@ -13,6 +13,8 @@ public class Group {
 
     public Group(String name) {
         this.name = name;
+        this.groupPhotoURL = "";
+        this.members = new HashSet<>();
     }
 
     public String getName() {
@@ -30,4 +32,6 @@ public class Group {
     public int getIconID() {
         return groupID;
     }
+
+    public String toString() { return name; }
 }

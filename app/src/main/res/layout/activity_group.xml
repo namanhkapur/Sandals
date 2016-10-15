@@ -41,8 +41,9 @@
         app:backgroundTint="@android:color/holo_blue_light" />
 
     <ListView
-        android:id="@+id/groups"
+        android:id="@+id/myGroups"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="503dp" />
+
 
 </android.support.design.widget.CoordinatorLayout>
