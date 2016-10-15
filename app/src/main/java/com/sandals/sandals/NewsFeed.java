@@ -22,7 +22,7 @@ public class NewsFeed extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_area);
+        setContentView(R.layout.news_feed);
 
         populateUsers();
         populateListView();
@@ -66,7 +66,8 @@ public class NewsFeed extends Activity {
 
             // fill the view
             ImageView imageView = (ImageView)itemView.findViewById(R.id.p1_icon);
-            imageView.setImageResource(currentPerson.getIconID());
+
+            imageView.setImageResource(currentPerson.getUserID());
 
             return itemView;
         }

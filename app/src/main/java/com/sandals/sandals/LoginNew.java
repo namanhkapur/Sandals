@@ -1,8 +1,6 @@
 package com.sandals.sandals;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +20,7 @@ public class LoginNew extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private EditText editEmail;
     private EditText editPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +44,14 @@ public class LoginNew extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 signIn(editEmail.getText().toString(), editPassword.getText().toString());
+            }
+        });
+
+        Button test = (Button) findViewById(R.id.NewsFeed);
+        test.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginNew.this, NewsFeed.class);
+                startActivity(intent);
             }
         });
 
@@ -83,12 +90,7 @@ public class LoginNew extends AppCompatActivity {
 
                             Toast.makeText(LoginNew.this, "Logged In!",
                                     Toast.LENGTH_SHORT).show();
-                            SharedPreferences sharedPref = LoginNew.this.getPreferences(Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putBoolean("isLoggedIn", true);
-                            editor.commit();
-                            Intent groupIntent = new Intent(LoginNew.this, GroupActivity.class);
-                            startActivity(groupIntent);
+
                         }
 
 

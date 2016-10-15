@@ -18,6 +18,7 @@ public class People {
         this.name = name;
         this.string_feeling = "";
         this.status = "";
+        this.iconID = "";
     }
 
     public void setFeeling(int f) { feeling = f; }
@@ -83,6 +84,10 @@ public class People {
     // for picture capability
     public void setIconID(String picture) {
         iconID = picture;
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
     public int getIconID() {
