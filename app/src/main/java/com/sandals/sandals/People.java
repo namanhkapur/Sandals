@@ -29,13 +29,13 @@ public class People {
 
         switch (feeling) {
             case 0:
-                string_feeling = "Joy";
+                string_feeling = "Happy";
                 break;
             case 1:
-                string_feeling = "Anger";
+                string_feeling = "Mad";
                 break;
             case 2:
-                string_feeling = "Anxiety";
+                string_feeling = "Nervous";
                 break;
             case 3:
                 string_feeling = "Surprise";
@@ -44,13 +44,13 @@ public class People {
                 string_feeling = "Trust";
                 break;
             case 5:
-                string_feeling = "Grief";
+                string_feeling = "Confused";
                 break;
             case 6:
-                string_feeling = "Fear";
+                string_feeling = "Afraid";
                 break;
             case 7:
-                string_feeling = "love";
+                string_feeling = "Love";
                 break;
             default:
                 string_feeling = "Null";
