@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         // register
 
         // Casey made this change here
-        Intent goToGroup = new Intent(RegisterActivity.this, Group.class);
+        Intent goToGroup = new Intent(RegisterActivity.this, GroupActivity.class);
         startActivity(goToGroup);
     }
 

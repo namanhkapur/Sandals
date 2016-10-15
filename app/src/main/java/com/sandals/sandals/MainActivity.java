@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         boolean isRegistered = getSharedPreferences("isRegistered", 0).getBoolean("isRegistered", false);
         boolean isLoggedIn = getSharedPreferences("isLoggedIn", 0).getBoolean("isLoggedIn", false);
         if (isLoggedIn) {
-            Intent goToGroup = new Intent(MainActivity.this, Group.class);
+            Intent goToGroup = new Intent(MainActivity.this, GroupActivity.class);
             startActivity(goToGroup);
         } else {
             Intent goToLogIn = new Intent(MainActivity.this, LoginNew.class);
