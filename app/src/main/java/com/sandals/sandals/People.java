@@ -11,13 +11,15 @@ public class People {
     public String string_feeling;
     public String status;
     private int iconID;
+    private String email;
 
-    public People(String name, int feeling) {
+    public People(String name, int feeling, String email) {
         this.name = name;
         this.feeling = feeling;
         this.string_feeling = "";
         this.status = "";
         this.iconID = 0;
+        this.email = email;
     }
 
     public String getName() {
@@ -60,6 +62,8 @@ public class People {
     public String getMood() {
         return string_feeling;
     }
+
+    public String getEmail() { return email; }
 
     public void setStatus(String message, int limit) {
         if (message.length() <= limit) {

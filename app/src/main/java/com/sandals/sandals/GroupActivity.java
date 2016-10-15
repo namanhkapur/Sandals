@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -37,7 +36,7 @@ import java.util.Map;
 
 public class GroupActivity extends AppCompatActivity {
 
-    ArrayList<HashMap<String, String>> groupsData;
+    ArrayList<HashMap<String, Object>> groupsData;
 
     HashSet<Group> allGroups;
 
@@ -109,7 +108,7 @@ public class GroupActivity extends AppCompatActivity {
                             }
 
                             // Pulls all groups!
-                            groupsData = (ArrayList<HashMap<String, String>>) retMap.get("response");
+                            groupsData = (ArrayList<HashMap<String, Object>>) retMap.get("response");
 
                             // Create groups
                             createGroups();
@@ -142,10 +141,16 @@ public class GroupActivity extends AppCompatActivity {
     }
 
     private void createGroups() {
-        HashMap<String, String> g;
-        Iterator<HashMap<String, String>> groups = groupsData.iterator();
+        Group addGroup;
+        HashMap<String, Object> g;
+        ArrayList<HashMap<String, Object>> groupMembers;
+        Iterator<HashMap<String, Object>> groups = groupsData.iterator();
         while (groups.hasNext()) {
             g = groups.next();
+            addGroup = new Group((String) g.get("name"));
+            addGroup.setGroupId(Integer.parseInt((String) g.get("group_id")));
+            groupMembers = (ArrayList<HashMap<String, Object>>) g.get("members");
+            addGroup.setMembersSize(groupMembers.size());
             System.out.println(g);
         }
     }
