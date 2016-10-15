@@ -20,7 +20,7 @@ public class LoginNew extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private EditText editEmail;
     private EditText editPassword;
-
+//random
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
