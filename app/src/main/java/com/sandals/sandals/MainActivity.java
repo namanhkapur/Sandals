@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 });
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialo
+                        // User cancelled the dialog
                     }
                 });
 
