@@ -56,7 +56,7 @@ public class NewsFeed extends AppCompatActivity {
 
         @Override
         public View getView(int position, View currentView, ViewGroup parent){
-            // make sure we have a view to work with
+            // make sure we have a view to work withh
             View itemView = currentView;
             if(itemView == null){
                 itemView = getLayoutInflater().inflate(R.layout.news_feed, parent, false);
