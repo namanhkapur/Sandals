@@ -9,5 +9,6 @@ public class LoginNew extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_new);
+        //i changed something
     }
 }
