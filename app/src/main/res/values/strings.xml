@@ -20,4 +20,6 @@
         completions."
     </string>
     <string name="title_activity_login">Sign in</string>
+    <string name="prompt_phone">Phone Number</string>
+    <string name="prompt_name">Name</string>
 </resources>
