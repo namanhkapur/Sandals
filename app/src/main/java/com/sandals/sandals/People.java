@@ -85,8 +85,8 @@ public class People {
         iconID = picture;
     }
 
-    public String getIconID() {
-        return iconID;
+    public int getIconID() {
+        return Integer.parseInt(iconID);
     }
 
 }
