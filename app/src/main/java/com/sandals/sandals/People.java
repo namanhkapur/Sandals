@@ -13,14 +13,15 @@ public class People {
     private int iconID;
     private String email;
 
-    public People(String name, int feeling, String email) {
+    public People(String name, int feeling) {
         this.name = name;
         this.feeling = feeling;
         this.string_feeling = "";
         this.status = "";
         this.iconID = 0;
-        this.email = email;
     }
+
+    public void setEmail(String e) { email = e; }
 
     public String getName() {
         return name;

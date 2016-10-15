@@ -9,7 +9,7 @@ public class Group {
     private int number_members;
     private int groupID;
     private HashSet<People> members;
-    private ImageView groupPhoto;
+    private String groupPhotoURL;
 
     public Group(String name) {
         this.name = name;
@@ -19,7 +19,7 @@ public class Group {
         return name;
     }
 
-    public void setImage(ImageView v) { groupPhoto = v; }
+    public void setImage(String v) { groupPhotoURL = v; }
 
     public void addMember(People p) { members.add(p); }
 

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -142,15 +143,20 @@ public class GroupActivity extends AppCompatActivity {
 
     private void createGroups() {
         Group addGroup;
+        People member;
         HashMap<String, Object> g;
         ArrayList<HashMap<String, Object>> groupMembers;
         Iterator<HashMap<String, Object>> groups = groupsData.iterator();
         while (groups.hasNext()) {
             g = groups.next();
             addGroup = new Group((String) g.get("name"));
+            addGroup.setImage((String) g.get("image_url"));
             addGroup.setGroupId(Integer.parseInt((String) g.get("group_id")));
             groupMembers = (ArrayList<HashMap<String, Object>>) g.get("members");
             addGroup.setMembersSize(groupMembers.size());
+            for (HashMap<String, Object> p : groupMembers) {
+
+            }
             System.out.println(g);
         }
     }
