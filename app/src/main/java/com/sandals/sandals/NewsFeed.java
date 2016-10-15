@@ -4,8 +4,8 @@ package com.sandals.sandals;
  * Created by namanh on 10/15/2016.
  */
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -15,7 +15,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsFeed extends Activity {
+public class NewsFeed extends AppCompatActivity {
 
     private List<People> users = new ArrayList<>();
 
@@ -23,6 +23,7 @@ public class NewsFeed extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_feed);
+
 
         populateUsers();
         populateListView();
