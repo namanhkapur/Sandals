@@ -63,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Casey made this change here
         createAccount(editEmail.getText().toString(), editPassword.getText().toString());
-        Intent goToGroup = new Intent(RegisterActivity.this, Group.class);
+        Intent goToGroup = new Intent(RegisterActivity.this, GroupActivity.class);
         startActivity(goToGroup);
     }
 
