@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "654880335104",
+    "firebase_url": "https://sandals-fbcdb.firebaseio.com",
+    "project_id": "sandals-fbcdb",
+    "storage_bucket": "sandals-fbcdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654880335104:android:7357f3c72c7aea22",
+        "android_client_info": {
+          "package_name": "com.sandals.sandals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654880335104-tsdgahdtqm6uvbdb977f40d6oh5ajd8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

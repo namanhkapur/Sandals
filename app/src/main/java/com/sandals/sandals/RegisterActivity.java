@@ -1,5 +1,6 @@
 package com.sandals.sandals;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,5 +23,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void attemptRegister() {
         // register
+
+        // Casey made this change here
+        Intent goToGroup = new Intent(RegisterActivity.this, Group.class);
+        startActivity(goToGroup);
     }
 }
