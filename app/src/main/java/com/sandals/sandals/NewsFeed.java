@@ -6,6 +6,8 @@ package com.sandals.sandals;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,10 @@ public class NewsFeed extends Activity {
         populateUsers();
     }
 
+    public void addUser(People person) {
+        users.add(person);
+    }
+
     private void populateUsers() {
         People Bob = new People("Bob", 0);
         People Alice = new People("Alice", 2);
@@ -29,7 +35,9 @@ public class NewsFeed extends Activity {
         addUser(Alice);
     }
 
-    public void addUser(People person) {
-        users.add(person);
+    public void populateListView() {
+        ArrayAdapter<People> adapter = new MyListAdapter();
+        ListView list = (ListView) findViewById(R.id.feed);
+        list.setAdapter(adapter);
     }
 }
