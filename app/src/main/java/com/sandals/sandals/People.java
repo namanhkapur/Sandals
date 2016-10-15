@@ -77,7 +77,7 @@ public class People {
         iconID = picture;
     }
 
-    public int getIconID(int picture) {
+    public int getIconID() {
         return iconID;
     }
 }
