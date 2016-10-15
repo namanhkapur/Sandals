@@ -94,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         // [START_EXCLUDE]
                         // [END_EXCLUDE]
+                        //
                     }
                 });
         // [END create_user_with_email]
