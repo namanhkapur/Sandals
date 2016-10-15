@@ -27,8 +27,8 @@ public class NewsFeed extends Activity {
     }
 
     private void populateUsers() {
-        People Bob = new People("Bob", 0, "bob@rice.edu");
-        People Alice = new People("Alice", 2, "alice@rice.edu");
+        People Bob = new People("Bob", 0);
+        People Alice = new People("Alice", 2);
         addUser(Bob);
         addUser(Alice);
     }

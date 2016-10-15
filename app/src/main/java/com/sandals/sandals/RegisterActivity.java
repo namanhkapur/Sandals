@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         // register
 
         // Casey made this change here
-//        createAccount(editEmail.getText().toString(), editPassword.getText().toString());
+        createAccount(editEmail.getText().toString(), editPassword.getText().toString());
         Intent goToGroup = new Intent(RegisterActivity.this, GroupActivity.class);
         startActivity(goToGroup);
     }
@@ -99,8 +99,13 @@ public class RegisterActivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, "Failed",
+                            Toast.makeText(RegisterActivity.this, "Failed to Register",
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Registration Successful!",
+                                    Toast.LENGTH_SHORT).show();
+                            //Intent goToGroup = new Intent(RegisterActivity.this, GroupActivity.class);
+                            //startActivity(goToGroup);
                         }
 
                         // [START_EXCLUDE]

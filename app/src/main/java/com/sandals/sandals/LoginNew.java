@@ -78,11 +78,14 @@ public class LoginNew extends AppCompatActivity {
                             Toast.makeText(LoginNew.this, "Failed to Log In",
                                     Toast.LENGTH_SHORT).show();
                         } else {
+
                             Toast.makeText(LoginNew.this, "Logged In!",
                                     Toast.LENGTH_SHORT).show();
+                            Intent groupIntent = new Intent(LoginNew.this, GroupActivity.class);
+                            startActivity(groupIntent);
                         }
 
-                        // ...
+
                     }
                 });
 
