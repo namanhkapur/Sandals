@@ -18,18 +18,14 @@ public class MainActivity extends AppCompatActivity {
 
         boolean isRegistered = getSharedPreferences("isRegistered", 0).getBoolean("isRegistered", false);
         boolean isLoggedIn = getSharedPreferences("isLoggedIn", 0).getBoolean("isLoggedIn", false);
-        if (isRegistered) {
-            if (isLoggedIn) {
-                Intent goToGroup = new Intent(MainActivity.this, Group.class);
-                startActivity(goToGroup);
-            } else {
-                Intent goToLogIn = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(goToLogIn);
-            }
+        if (isLoggedIn) {
+            Intent goToGroup = new Intent(MainActivity.this, Group.class);
+            startActivity(goToGroup);
         } else {
-            Intent goToRegister = new Intent(MainActivity.this, RegisterActivity.class);
-            startActivity(goToRegister);
+            Intent goToLogIn = new Intent(MainActivity.this, LoginNew.class);
+            startActivity(goToLogIn);
         }
+
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.sandals.sandals;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 public class LoginNew extends AppCompatActivity {
 
@@ -9,6 +12,18 @@ public class LoginNew extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_new);
-        //i changed something
+        Button regButton = (Button) findViewById(R.id.Register);
+        Button logInButton = (Button) findViewById(R.id.Login);
+        regButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent regIntent = new Intent(LoginNew.this, RegisterActivity.class);
+                startActivity(regIntent);
+            }
+        });
+        logInButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // authenticate
+            }
+        });
     }
 }
