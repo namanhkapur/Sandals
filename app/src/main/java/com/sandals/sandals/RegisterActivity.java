@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -14,13 +15,19 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+
+
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private EditText editEmail;
+    private EditText editPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        editEmail = (EditText) findViewById(R.id.editEmail);
+        editPassword = (EditText) findViewById(R.id.editPassword);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -55,7 +62,8 @@ public class RegisterActivity extends AppCompatActivity {
         // register
 
         // Casey made this change here
-        Intent goToGroup = new Intent(RegisterActivity.this, GroupActivity.class);
+        createAccount(editEmail.getText().toString(), editPassword.getText().toString());
+        Intent goToGroup = new Intent(RegisterActivity.this, Group.class);
         startActivity(goToGroup);
     }
 
