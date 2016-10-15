@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -45,9 +46,11 @@ import java.util.Map;
 
 public class GroupActivity extends AppCompatActivity {
 
-    ArrayAdapter<Integer> adapter;
     ArrayList<HashMap<String, Object>> groupsData;
     HashSet<Group> allGroups = new HashSet<>();
+
+    private ArrayList<String> list = new ArrayList<>();
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -165,8 +168,6 @@ public class GroupActivity extends AppCompatActivity {
         ListView myGroups = (ListView) findViewById(R.id.myGroups);
         Iterator<HashMap<String, Object>> groups = groupsData.iterator();
 
-        int count = 0;
-        Integer[] groupIds = new Integer[groupsData.size()];
         while (groups.hasNext()) {
             g = groups.next();
             addGroup = new Group((String) g.get("name"));
@@ -186,10 +187,9 @@ public class GroupActivity extends AppCompatActivity {
                 addGroup.addMember(member);
             }
             allGroups.add(addGroup);
-            groupIds[count] = (Integer) g.get("ground_id");
-            count += 1;
+            list.add((String) g.get("name"));
         }
-        adapter = new ArrayAdapter<>(GroupActivity.this, R.layout.activity_group, groupIds);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         myGroups.setAdapter(adapter);
     }
 
