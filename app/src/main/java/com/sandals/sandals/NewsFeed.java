@@ -4,6 +4,8 @@ package com.sandals.sandals;
  * Created by namanh on 10/15/2016.
  */
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -23,6 +28,10 @@ import java.util.List;
 public class NewsFeed extends AppCompatActivity {
 
     private List<People> users = new ArrayList<>();
+    private EditText editStatus;
+    private Spinner spinner;
+    private ArrayAdapter<People> adapter;
+    private ArrayAdapter<String> dataAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,27 +54,27 @@ public class NewsFeed extends AppCompatActivity {
         People Anthony = new People("Anthony Cho");
 
         Namanh.setUserID(R.mipmap.namanh);
-        Namanh.setStatus("Check out my new app, Sandals!", 50);
+        Namanh.setStatus("Check out my new app, Sandals!", 100);
         Namanh.setMood(5);
         Namanh.setPhoneNumber(Long.parseLong("8322770363"));
 
         Kevin.setUserID(R.mipmap.kevin);
-        Kevin.setStatus("I need more caffeine...", 50);
+        Kevin.setStatus("I need more caffeine...", 100);
         Kevin.setMood(1);
         Kevin.setPhoneNumber(Long.parseLong("7143264413"));
 
         Casey.setUserID(R.mipmap.casey);
-        Casey.setStatus("Airplanes", 50);
+        Casey.setStatus("Airplanes", 100);
         Casey.setMood(5);
         Casey.setPhoneNumber(Long.parseLong("5623166537"));
 
         Hasnain.setUserID(R.mipmap.hasnain);
-        Hasnain.setStatus("Made another half court shot!", 50);
+        Hasnain.setStatus("Made another half court shot!", 100);
         Hasnain.setMood(6);
         Hasnain.setPhoneNumber(Long.parseLong("8323824287"));
 
         Anthony.setUserID(R.mipmap.anthony);
-        Anthony.setStatus("I'm really good looking", 50);
+        Anthony.setStatus("I'm really good looking", 100);
         Anthony.setMood(4);
         Anthony.setPhoneNumber(Long.parseLong("7138288185"));
 
@@ -77,7 +86,7 @@ public class NewsFeed extends AppCompatActivity {
     }
 
     public void populateListView() {
-        ArrayAdapter<People> adapter = new MyListAdapter();
+        adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.feed);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,10 +94,62 @@ public class NewsFeed extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-                Intent callIntent = new Intent(NewsFeed.this, CallActivity.class);
-                callIntent.putExtra("number", users.get(position).getPhoneNumber());
-                callIntent.putExtra("name", users.get(position).getName());
-                startActivity(callIntent);
+                if (position == 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(NewsFeed.this);
+                    builder.setTitle("How Are You Feeling?");
+                    editStatus = new EditText(NewsFeed.this);
+                    editStatus.setHint("Let you group know your emotion");
+                    spinner = new Spinner(NewsFeed.this);
+
+                    ArrayList<String> list = new ArrayList<String>();
+                    list.add("Happy");
+                    list.add("Mad");
+                    list.add("Nervous");
+                    list.add("Surprised");
+                    list.add("Excited");
+                    list.add("Confused");
+                    list.add("Afraid");
+                    list.add("Love");
+                    list.add("Sad");
+
+
+                    dataAdapter = new ArrayAdapter<String>(NewsFeed.this, android.R.layout.simple_spinner_item, list);
+                    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(dataAdapter);
+
+                    LinearLayout ll = new LinearLayout(NewsFeed.this);
+                    ll.setOrientation(LinearLayout.VERTICAL);
+                    ll.addView(editStatus);
+                    spinner.setPadding(5, 10, 5, 10);
+
+                    ll.addView(spinner);
+                    builder.setView(ll);
+                    builder.setCancelable(false);
+
+                    builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            users.get(0).setStatus(editStatus.getText().toString(), 100);
+                            users.get(0).setMood(spinner.getSelectedItemPosition());
+                            dataAdapter.notifyDataSetChanged();
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+
+                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+
+                } else {
+                    Intent callIntent = new Intent(NewsFeed.this, CallActivity.class);
+                    callIntent.putExtra("number", users.get(position).getPhoneNumber());
+                    callIntent.putExtra("name", users.get(position).getName());
+                    startActivity(callIntent);
+                }
 
             }
 
