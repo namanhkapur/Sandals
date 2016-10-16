@@ -3,9 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarCreated"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary" />
+
+    </android.support.design.widget.AppBarLayout>
+
     <ListView
-       android:id="@+id/feed"
-       android:layout_width="match_parent"
+        android:id="@+id/created"
+        android:layout_width="match_parent"
 
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -15,7 +29,7 @@
     <ImageView
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/p1_icon"
+        android:id="@+id/cre_icon"
         android:adjustViewBounds="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -27,36 +41,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:id="@+id/p1_name"
+        android:id="@+id/cre_name"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_toRightOf="@+id/p1_icon"
+        android:layout_toRightOf="@+id/cre_icon"
         android:gravity="center" />
 
     <TextView
         android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/p1_statustime"
+        android:id="@+id/cre_statustime"
         android:textSize="10sp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:paddingRight="10dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/p1_status" />
+        android:layout_alignParentRight="true" />
 
     <TextView
         android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/p1_status"
-        android:paddingTop="8dp"
+        android:paddingTop="7dp"
         android:paddingBottom="3dp"
         android:textSize="20sp"
-        android:layout_below="@+id/p1_name"
-        android:layout_toRightOf="@+id/p1_icon"
-        android:layout_toEndOf="@+id/p1_icon" />
+        android:layout_below="@+id/cre_name"
+        android:layout_toRightOf="@+id/cre_icon"
+        android:layout_toEndOf="@+id/cre_icon" />
 
     <ImageView
         android:layout_width="35dp"
@@ -65,11 +78,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:visibility="visible"
-        android:id="@+id/p1_emotion"
+        android:id="@+id/cre_emotion"
         android:adjustViewBounds="true"
         android:baselineAlignBottom="false"
         android:clickable="false"
-         />
+        />
+
+
 
 </RelativeLayout>
-

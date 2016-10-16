@@ -29,7 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:srcCompat="@android:drawable/ic_menu_add"
+        app:backgroundTint="@color/colorPrimary" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/create"
@@ -37,8 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email"
-        app:backgroundTint="@android:color/holo_blue_light" />
+        app:srcCompat="@mipmap/groupme"
+        app:backgroundTint="?attr/colorBackgroundFloating" />
 
     <ListView
         android:id="@+id/myGroups"
