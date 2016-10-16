@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,7 +54,6 @@ public class GroupActivity extends AppCompatActivity {
     private EditText editGroupName;
     private boolean hasImported = false;
 
-
     private ArrayList<String> list = new ArrayList<>();
 
     /**
@@ -72,19 +70,7 @@ public class GroupActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
         FloatingActionButton group = (FloatingActionButton) findViewById(R.id.create);
-
-        ArrayAdapter adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_1, list);
-        myGroups = (ListView) findViewById(R.id.myGroups);
-        myGroups.setAdapter(adapter);
-        myGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " is selected",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,13 +90,15 @@ public class GroupActivity extends AppCompatActivity {
                         myGroups = (ListView) findViewById(R.id.myGroups);
                         myGroups.setAdapter(adapter);
                         myGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
                             @Override
                             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " is selected",
-                                        Toast.LENGTH_LONG).show();
+                                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + "is selected",
+                                        Toast.LENGTH_SHORT).show();
                             }
 
                         });
+
                     }
                 });
 
@@ -242,14 +230,14 @@ public class GroupActivity extends AppCompatActivity {
         myGroups.setAdapter(adapter);
 
         myGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " is selected",
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + "is selected",
+                        Toast.LENGTH_SHORT).show();
             }
 
         });
-
     }
 
 
