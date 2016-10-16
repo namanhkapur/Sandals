@@ -49,6 +49,7 @@ public class LoginNew extends AppCompatActivity {
             }
         });
 
+
         Button test = (Button) findViewById(R.id.NewsFeed);
         test.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
