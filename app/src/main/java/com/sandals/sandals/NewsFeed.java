@@ -37,31 +37,37 @@ public class NewsFeed extends AppCompatActivity {
     }
 
     private void populateUsers() {
-        People Bob = new People("Bob");
-        People Alice = new People("Alice");
-        People Jeffrey = new People("Jeffrey");
-        People Sarah = new People ("Sarah");
+        People Namanh = new People("Namanh Kapur");
+        People Kevin = new People("Kevin Lin");
+        People Casey = new People("Casey Takeda");
+        People Hasnain = new People("Hasnain Ali");
+        People Anthony = new People("Anthony Cho");
 
-        Alice.setUserID(R.mipmap.ic_launcher);
-        Alice.setStatus("Fuck my life...", 50);
-        Alice.setMood(1);
+        Namanh.setUserID(R.mipmap.namanh);
+        Namanh.setStatus("Check out my new app, Sandals!", 50);
+        Namanh.setMood(5);
 
-        Bob.setUserID(R.mipmap.ic_launcher);
-        Bob.setStatus("It's too late to apologize", 50);
-        Bob.setMood(5);
+        Kevin.setUserID(R.mipmap.kevin);
+        Kevin.setStatus("I need more caffeine...", 50);
+        Kevin.setMood(1);
 
-        Jeffrey.setUserID(R.mipmap.ic_launcher);
-        Jeffrey.setStatus("Terrorist attack in Paris", 50);
-        Jeffrey.setMood(6);
+        Casey.setUserID(R.mipmap.casey);
+        Casey.setStatus("Airplanes", 50);
+        Casey.setMood(5);
 
-        Sarah.setUserID(R.mipmap.ic_launcher);
-        Sarah.setStatus("Just aced that test!", 50);
-        Sarah.setMood(4);
+        Hasnain.setUserID(R.mipmap.hasnain);
+        Hasnain.setStatus("Made another half court shot!", 50);
+        Hasnain.setMood(6);
 
-        addUser(Bob);
-        addUser(Alice);
-        addUser(Jeffrey);
-        addUser(Sarah);
+        Anthony.setUserID(R.mipmap.anthony);
+        Anthony.setStatus("I'm really good looking", 50);
+        Anthony.setMood(4);
+
+        addUser(Namanh);
+        addUser(Kevin);
+        addUser(Casey);
+        addUser(Hasnain);
+        addUser(Anthony);
     }
 
     public void populateListView() {
