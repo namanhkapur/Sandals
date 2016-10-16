@@ -75,6 +75,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
         android:gravity="center"
         android:layout_height="125dp"
+        android:textSize="100sp"
         android:layout_marginBottom="23dp"
         android:layout_above="@+id/editName"
         android:layout_alignParentLeft="true"
