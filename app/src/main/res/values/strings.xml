@@ -9,6 +9,7 @@
     <string name="title_activity_group">My Groups</string>
     <string name="title_activity_register">Sign in</string>
     <string name="already_imported">You already imported from GroupMe!</string>
+    <string name="name_taken">There is a group with this name!</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
