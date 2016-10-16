@@ -42,6 +42,7 @@ public class LoginNew extends AppCompatActivity {
                 startActivity(regIntent);
             }
         });
+
         logInButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 signIn(editEmail.getText().toString(), editPassword.getText().toString());
