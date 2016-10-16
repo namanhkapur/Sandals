@@ -88,6 +88,7 @@ public class NewsFeed extends AppCompatActivity {
     public void addUser(People person) {
         users.add(person);
     }
+    //
 
     private void populateUsers() {
 
