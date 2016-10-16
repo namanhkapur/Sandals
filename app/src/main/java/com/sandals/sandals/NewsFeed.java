@@ -97,8 +97,9 @@ public class NewsFeed extends AppCompatActivity {
         Namanh.setMood(4);
         Namanh.setPhoneNumber(Long.parseLong("8322770363"));
         addUser(Namanh);
+        int randNum = (int) (Math.random() * 5 + 3);
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < randNum; i++) {
 
             int randName = random(names.size() - 1);
             while (existingNames.contains(randName)) {
