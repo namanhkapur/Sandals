@@ -1,4 +1,5 @@
 package com.sandals.sandals;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -51,7 +53,7 @@ public class GroupActivity extends AppCompatActivity {
 
     ListView myGroups;
     ArrayList<HashMap<String, Object>> groupsData;
-    HashSet<Group> allGroups = new HashSet<>();
+    ArrayList<Group> allGroups = new ArrayList<Group>();
     private EditText editGroupName;
     private boolean hasImported = false;
 
@@ -76,6 +78,8 @@ public class GroupActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         FloatingActionButton group = (FloatingActionButton) findViewById(R.id.create);
 
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +100,9 @@ public class GroupActivity extends AppCompatActivity {
                             list.add(0, newGroup.getName());
                             createdGroups.add(newGroup.getName());
 
-                            ArrayAdapter adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_1, list);
+
+
+                            ArrayAdapter adapter = new MyListAdapter();
                             myGroups = (ListView) findViewById(R.id.myGroups);
                             myGroups.setAdapter(adapter);
                             myGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -252,15 +258,16 @@ public class GroupActivity extends AppCompatActivity {
             list.add((String) g.get("name"));
         }
         myGroups =  (ListView) findViewById(R.id.myGroups);
-        ArrayAdapter adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_1, list);
+        ArrayAdapter adapter = new MyListAdapter();
         myGroups.setAdapter(adapter);
 
         myGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                String groupName = (String) parent.getItemAtPosition(position);
-                Toast.makeText(getBaseContext(),groupName + "is selected",
+                //String groupName = (String) parent.getItemAtPosition(position);
+                String groupName = allGroups.get(position).getName();
+                Toast.makeText(getBaseContext(), groupName + " is selected",
                         Toast.LENGTH_SHORT).show();
 
                 // Go to NewsFeed
@@ -328,6 +335,36 @@ public class GroupActivity extends AppCompatActivity {
         }
         return list;
     }
+    private class MyListAdapter extends ArrayAdapter<Group> {
+
+        public MyListAdapter() {
+            super(GroupActivity.this, R.layout.group_adapter, allGroups);
+        }
+
+        @Override
+        public View getView(int position, View currentView, ViewGroup parent) {
+            // make sure we have a view to work with
+            View itemView = currentView;
+            if (itemView == null) {
+                itemView = getLayoutInflater().inflate(R.layout.group_adapter, parent, false);
+            }
+
+            // find people to work with
+            //People currentPerson = users.get(position);
+            Group group = allGroups.get(position);
+
+            // fill the view
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView2);
+            imageView.setImageResource(R.mipmap.ic_launcher);
+
+            // name
+            TextView personName = (TextView) itemView.findViewById(R.id.textView5);
+            personName.setText(group.getName());
+
+            return itemView;
+        }
+    }
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -364,4 +401,8 @@ public class GroupActivity extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
+
+
+
 }
+
