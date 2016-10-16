@@ -39,14 +39,29 @@ public class NewsFeed extends AppCompatActivity {
     private void populateUsers() {
         People Bob = new People("Bob");
         People Alice = new People("Alice");
+        People Jeffrey = new People("Jeffrey");
+        People Sarah = new People ("Sarah");
+
         Alice.setUserID(R.mipmap.ic_launcher);
-        Alice.setStatus("Fuck my life!", 100);
+        Alice.setStatus("Fuck my life...", 50);
         Alice.setMood(1);
+
         Bob.setUserID(R.mipmap.ic_launcher);
-        Bob.setStatus("It's too late to apologize", 100);
+        Bob.setStatus("It's too late to apologize", 50);
         Bob.setMood(5);
+
+        Jeffrey.setUserID(R.mipmap.ic_launcher);
+        Jeffrey.setStatus("Terrorist attack in Paris", 50);
+        Jeffrey.setMood(6);
+
+        Sarah.setUserID(R.mipmap.ic_launcher);
+        Sarah.setStatus("Just aced that test!", 50);
+        Sarah.setMood(4);
+
         addUser(Bob);
         addUser(Alice);
+        addUser(Jeffrey);
+        addUser(Sarah);
     }
 
     public void populateListView() {
@@ -75,6 +90,10 @@ public class NewsFeed extends AppCompatActivity {
             // fill the view
             ImageView imageView = (ImageView)itemView.findViewById(R.id.p1_icon);
             imageView.setImageResource(currentPerson.getUserID());
+
+            // mood
+            ImageView personMood = (ImageView)itemView.findViewById(R.id.p1_emotion) ;
+            imageView.setImageResource(/*currentPerson.getMood()*/ currentPerson.getUserID());
 
             // name
             TextView personName = (TextView)itemView.findViewById(R.id.p1_name);
