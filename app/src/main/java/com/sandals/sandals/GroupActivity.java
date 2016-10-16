@@ -235,7 +235,7 @@ public class GroupActivity extends AppCompatActivity {
 
             // If existing name exists, move on.
             addGroup = new Group((String) g.get("name"));
-            if (groupMeGroups.contains(addGroup.getName()) || createdGroups.contains(addGroup.getName())) {
+            if (groupMeGroups.contains(addGroup.getName()) || createdGroups.contains(addGroup.getName()) || addGroup.getName().equals("")) {
                 continue;
             }
             if (!g.get("image_url").equals(null)) {
