@@ -27,7 +27,6 @@ public class NewsFeed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_feed);
 
-
         populateUsers();
         populateListView();
     }
@@ -46,22 +45,27 @@ public class NewsFeed extends AppCompatActivity {
         Namanh.setUserID(R.mipmap.namanh);
         Namanh.setStatus("Check out my new app, Sandals!", 50);
         Namanh.setMood(5);
+        Namanh.setPhoneNumber(Long.parseLong("8322770363"));
 
         Kevin.setUserID(R.mipmap.kevin);
         Kevin.setStatus("I need more caffeine...", 50);
         Kevin.setMood(1);
+        Kevin.setPhoneNumber(Long.parseLong("7143264413"));
 
         Casey.setUserID(R.mipmap.casey);
         Casey.setStatus("Airplanes", 50);
         Casey.setMood(5);
+        Casey.setPhoneNumber(Long.parseLong("5623166537"));
 
         Hasnain.setUserID(R.mipmap.hasnain);
         Hasnain.setStatus("Made another half court shot!", 50);
         Hasnain.setMood(6);
+        Hasnain.setPhoneNumber(Long.parseLong("8323824287"));
 
         Anthony.setUserID(R.mipmap.anthony);
         Anthony.setStatus("I'm really good looking", 50);
         Anthony.setMood(4);
+        Anthony.setPhoneNumber(Long.parseLong("7138288185"));
 
         addUser(Namanh);
         addUser(Kevin);
