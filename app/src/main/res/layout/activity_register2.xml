@@ -16,28 +16,15 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:id="@+id/editName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:hint="@string/prompt_name"
-        android:maxLines="1" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editPassword"
-        android:hint="@string/prompt_password"
-        android:layout_below="@+id/editPhone"
+        android:maxLines="1"
+        android:layout_above="@+id/buttonRegister"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="158dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:maxLines="1" />
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -46,12 +33,13 @@
         android:ems="10"
         android:id="@+id/editEmail"
         android:hint="@string/prompt_email"
-        android:layout_below="@+id/editName"
+        android:maxLines="1"
+        android:layout_above="@+id/editPhone"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:maxLines="1" />
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -60,12 +48,28 @@
         android:ems="10"
         android:id="@+id/editPhone"
         android:hint="@string/prompt_phone"
-        android:layout_below="@+id/editEmail"
+        android:maxLines="1"
+        android:layout_above="@+id/editPassword"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editPassword"
+        android:hint="@string/prompt_password"
+        android:maxLines="1"
+        android:layout_marginBottom="55dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:maxLines="1" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="Register"
@@ -77,5 +81,16 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Sandals"
+        android:id="@+id/textView3"
+        android:layout_width="400dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:gravity="center"
+        android:layout_height="125dp"
+        android:layout_above="@+id/editName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
