@@ -62,7 +62,6 @@ public class NewsFeed extends AppCompatActivity {
         names.add("Morgan Ali");
         names.add("Remy Davidson");
         names.add("Alex Parker");
-        names.add("Sammy Park");
 
         statuses.add("I am feeling troubled");
         statuses.add("It's 4AM!");
@@ -76,14 +75,14 @@ public class NewsFeed extends AppCompatActivity {
         statuses.add("So much homework...");
         statuses.add("Go Mavs!!!");
         statuses.add("Can't believe this!!");
-        statuses.add("Anyone feelling lonely?");
+        statuses.add("Anyone feeling lonely?");
         statuses.add("Ten days - no drinks!");
         statuses.add("That party was lit");
 
     }
 
     public int random(int num) {
-        return (int) (Math.round(Math.random() * num));
+        return (int) Math.round(Math.random() * num);
     }
 
     public void addUser(People person) {
@@ -115,10 +114,11 @@ public class NewsFeed extends AppCompatActivity {
             existingStatuses.add(randStatus);
             person.setStatus(statuses.get(randStatus), 50);
 
-            int randPic = random(10);
-            while (existingPics.contains(randStatus)) {
-                randStatus = random(10);
+            int randPic = random(9);
+            while (existingPics.contains(randPic)) {
+                randPic = random(9);
             }
+            existingPics.add(randPic);
 
             int imgPath = 0;
 
@@ -154,7 +154,8 @@ public class NewsFeed extends AppCompatActivity {
                     imgPath = R.mipmap.p9;
             }
 
-            person.setMood(random(9));
+            person.setUserID(imgPath);
+            person.setMood(random(8));
             person.setPhoneNumber(Long.parseLong("8322770363"));
             addUser(person);
 
@@ -186,7 +187,7 @@ public class NewsFeed extends AppCompatActivity {
                     list.add("Confused");
                     list.add("Afraid");
                     list.add("Love");
-                    list.add("S2ad");
+                    list.add("Sad");
 
 
                     dataAdapter = new ArrayAdapter<String>(NewsFeed.this, android.R.layout.simple_spinner_item, list);
@@ -207,7 +208,7 @@ public class NewsFeed extends AppCompatActivity {
                             users.get(0).setStatus(editStatus.getText().toString(), 100);
                             users.get(0).setMood(spinner.getSelectedItemPosition());
                             //dataAdapter.notifyDataSetChanged();
-                            // adapter.notifyDataSetChanged();
+                            adapter.notifyDataSetChanged();
                         }
                     });
 
@@ -242,23 +243,33 @@ public class NewsFeed extends AppCompatActivity {
         public View getView(int position, View currentView, ViewGroup parent){
             // make sure we have a view to work with
             View itemView = currentView;
-            if(itemView == null){
+            if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.news_feed, parent, false);
             }
 
             // find people to work with
-            int randPerson = random(users.size() - 1);
-            People currentPerson;
+            People currentPerson = users.get(position);
 
-            if (users.get(position).getName().equals("Namanh Kapur")) {
-                currentPerson = users.get(0);
-            } else {
-                while (existingUsers.contains(randPerson)) {
-                    randPerson = random(users.size() - 1);
-                }
-                existingUsers.add(randPerson);
-                currentPerson = users.get(randPerson);
-            }
+//            if (currentPerson.getName().equals("Namanh Kapur")){
+//                currentPerson = users.get(0);
+//            }
+//            else {
+//                int randPerson = random(users.size() - 1);
+//                while (existingUsers.contains(randPerson)) {
+//                    randPerson = random(users.size() - 1);
+//                }
+//                existingUsers.add(randPerson);
+//                currentPerson = users.get(randPerson);
+//            }
+//            if (currentPerson.getName().equals("Namanh Kapur")) {
+//                currentPerson = users.get(0);
+//            } else {
+//                while (existingUsers.contains(randPerson)) {
+//                    randPerson = random(users.size() - 1);
+//                }
+//                existingUsers.add(randPerson);
+//                currentPerson = users.get(randPerson);
+//            }
 
             // fill the view
             ImageView imageView = (ImageView)itemView.findViewById(R.id.p1_icon);
