@@ -1,4 +1,5 @@
 package com.sandals.sandals;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -16,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.ViewGroup;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -43,24 +44,20 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class GroupActivity extends AppCompatActivity {
 
+    static HashMap<String, Group> groupMeGroups = new HashMap<>();
+    static HashMap<String, Group> createdGroups = new HashMap<>();
     ListView myGroups;
     ArrayList<HashMap<String, Object>> groupsData;
     ArrayList<Group> allGroups = new ArrayList<>();
     private EditText editGroupName;
     private boolean hasImported = false;
-
     private ArrayList<String> list = new ArrayList<>();
-
-    static HashMap<String, Group> groupMeGroups = new HashMap<>();
-    static HashMap<String, Group> createdGroups = new HashMap<>();
-
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -73,6 +70,58 @@ public class GroupActivity extends AppCompatActivity {
         } else {
             return createdGroups.get(n);
         }
+    }
+
+    private static String convertStreamToString(InputStream inputStream) throws IOException {
+        if (inputStream != null) {
+            Writer writer = new StringWriter();
+
+            char[] buffer = new char[1024];
+            try {
+                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 1024);
+                int n;
+                while ((n = reader.read(buffer)) != -1) {
+                    writer.write(buffer, 0, n);
+                }
+            } finally {
+                inputStream.close();
+            }
+            return writer.toString();
+        } else {
+            return "";
+        }
+    }
+
+    private static Map<String, Object> toMap(JSONObject object) throws JSONException {
+        Map<String, Object> map = new HashMap<>();
+
+        Iterator<String> keysItr = object.keys();
+        while (keysItr.hasNext()) {
+            String key = keysItr.next();
+            Object value = object.get(key);
+
+            if (value instanceof JSONArray) {
+                value = toList((JSONArray) value);
+            } else if (value instanceof JSONObject) {
+                value = toMap((JSONObject) value);
+            }
+            map.put(key, value);
+        }
+        return map;
+    }
+
+    private static List<Object> toList(JSONArray array) throws JSONException {
+        List<Object> list = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            Object value = array.get(i);
+            if (value instanceof JSONArray) {
+                value = toList((JSONArray) value);
+            } else if (value instanceof JSONObject) {
+                value = toMap((JSONObject) value);
+            }
+            list.add(value);
+        }
+        return list;
     }
 
     @Override
@@ -112,20 +161,23 @@ public class GroupActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onItemClick(AdapterView parent, View view, int position, long id) {
-                                    String groupName = (String) parent.getItemAtPosition(position);
+                                    String groupName = ((Group) parent.getItemAtPosition(position)).getName();
                                     Toast.makeText(getBaseContext(),groupName + " is selected",
                                             Toast.LENGTH_SHORT).show();
 
-                                    // Go to NewsFeed
-                                    if (groupMeGroups.containsKey(groupName)) {
-                                        Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
-                                        startActivity(goToGroup);
-                                    } else if (createdGroups.containsKey(groupName)){
-                                        // Go to created class
-                                        Intent goToGroup = new Intent(GroupActivity.this, CreatedGroup.class);
-                                        goToGroup.putExtra("group", groupName);
-                                        startActivity(goToGroup);
-                                    }
+                                    Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
+                                    startActivity(goToGroup);
+
+//                                    // Go to NewsFeed
+//                                    if (groupMeGroups.containsKey(groupName)) {
+//                                        Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
+//                                        startActivity(goToGroup);
+//                                    } else if (createdGroups.containsKey(groupName)){
+//                                        // Go to created class
+//                                        Intent goToGroup = new Intent(GroupActivity.this, CreatedGroup.class);
+//                                        goToGroup.putExtra("group", groupName);
+//                                        startActivity(goToGroup);
+//                                    }
 
                                 }
 
@@ -273,103 +325,26 @@ public class GroupActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                String groupName = (String) parent.getItemAtPosition(position);
+                String groupName = ((Group) parent.getItemAtPosition(position)).getName();
                 Toast.makeText(getBaseContext(),groupName + " is selected",
                         Toast.LENGTH_SHORT).show();
 
-                // Go to NewsFeed
-                if (groupMeGroups.containsKey(groupName)) {
-                    Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
-                    startActivity(goToGroup);
-                } else {
-                    // Go to created class
-                    Intent goToGroup = new Intent(GroupActivity.this, CreatedGroup.class);
-                    goToGroup.putExtra("group", groupName);
-                    startActivity(goToGroup);
-                }
+                Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
+                startActivity(goToGroup);
+//                // Go to NewsFeed
+//                if (groupMeGroups.containsKey(groupName)) {
+//                    Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
+//                    startActivity(goToGroup);
+//                } else {
+//                    // Go to created class
+//                    Intent goToGroup = new Intent(GroupActivity.this, CreatedGroup.class);
+//                    goToGroup.putExtra("group", groupName);
+//                    startActivity(goToGroup);
+//                }
 
             }
 
         });
-    }
-
-    private class MyListAdapter extends ArrayAdapter<Group> {
-        public MyListAdapter() {
-            super(GroupActivity.this, R.layout.group_adapter, allGroups);
-        }
-
-        @Override
-        public View getView(int position, View currentView, ViewGroup parent) {
-            View itemView = currentView;
-            if (itemView == null) {
-                itemView = getLayoutInflater().inflate(R.layout.group_adapter, parent, false);
-            }
-
-            // Get group
-            Group group = allGroups.get(position);
-
-            // View
-            ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView2);
-            imageView.setImageResource(R.mipmap.ic_launcher);
-
-            // Name
-            TextView groupName = (TextView) itemView.findViewById(R.id.textView5);
-            groupName.setText(group.getName());
-
-            return itemView;
-        }
-    }
-
-    private static String convertStreamToString(InputStream inputStream) throws IOException {
-        if (inputStream != null) {
-            Writer writer = new StringWriter();
-
-            char[] buffer = new char[1024];
-            try {
-                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 1024);
-                int n;
-                while ((n = reader.read(buffer)) != -1) {
-                    writer.write(buffer, 0, n);
-                }
-            } finally {
-                inputStream.close();
-            }
-            return writer.toString();
-        } else {
-            return "";
-        }
-    }
-
-    private static Map<String, Object> toMap(JSONObject object) throws JSONException {
-        Map<String, Object> map = new HashMap<>();
-
-        Iterator<String> keysItr = object.keys();
-        while (keysItr.hasNext()) {
-            String key = keysItr.next();
-            Object value = object.get(key);
-
-            if (value instanceof JSONArray) {
-                value = toList((JSONArray) value);
-            } else if (value instanceof JSONObject) {
-                value = toMap((JSONObject) value);
-            }
-            map.put(key, value);
-        }
-        return map;
-    }
-
-    private static List<Object> toList(JSONArray array) throws JSONException {
-        List<Object> list = new ArrayList<>();
-        for (int i = 0; i < array.length(); i++) {
-            Object value = array.get(i);
-            if (value instanceof JSONArray) {
-                value = toList((JSONArray) value);
-            } else if (value instanceof JSONObject) {
-                value = toMap((JSONObject) value);
-            }
-            list.add(value);
-        }
-        return list;
     }
 
     /**
@@ -406,5 +381,32 @@ public class GroupActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+    }
+
+    private class MyListAdapter extends ArrayAdapter<Group> {
+        public MyListAdapter() {
+            super(GroupActivity.this, R.layout.group_adapter, allGroups);
+        }
+
+        @Override
+        public View getView(int position, View currentView, ViewGroup parent) {
+            View itemView = currentView;
+            if (itemView == null) {
+                itemView = getLayoutInflater().inflate(R.layout.group_adapter, parent, false);
+            }
+
+            // Get group
+            Group group = allGroups.get(position);
+
+            // View
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView2);
+            imageView.setImageResource(R.mipmap.ic_launcher);
+
+            // Name
+            TextView groupName = (TextView) itemView.findViewById(R.id.textView5);
+            groupName.setText(group.getName());
+
+            return itemView;
+        }
     }
 }
