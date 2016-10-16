@@ -99,7 +99,7 @@ public class NewsFeed extends AppCompatActivity {
 
             // mood
             ImageView personMood = (ImageView)itemView.findViewById(R.id.p1_emotion) ;
-            imageView.setImageResource(/*currentPerson.getMood()*/ currentPerson.getUserID());
+            imageView.setImageResource(R.mipmap.sad);
 
             // name
             TextView personName = (TextView)itemView.findViewById(R.id.p1_name);

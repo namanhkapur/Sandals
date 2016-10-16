@@ -8,7 +8,7 @@ public class People {
 
     public String name;
     public int feeling;
-    public String string_feeling;
+    public int mood;
     public String status;
     public int userID;
     public String iconID;
@@ -16,7 +16,7 @@ public class People {
 
     public People(String name) {
         this.name = name;
-        this.string_feeling = "";
+        this.mood = 9;
         this.status = "";
         this.iconID = "";
     }
@@ -34,36 +34,40 @@ public class People {
 
         switch (feeling) {
             case 0:
-                string_feeling = "Happy";
+                mood = R.mipmap.happy;
                 break;
             case 1:
-                string_feeling = "Mad";
+                mood = R.mipmap.mad;
                 break;
             case 2:
-                string_feeling = "Nervous";
+                mood = R.mipmap.nervous;
                 break;
             case 3:
-                string_feeling = "Surprised";
+                mood = R.mipmap.surprised;
                 break;
             case 4:
-                string_feeling = "Excited";
+                mood = R.mipmap.excited;
                 break;
             case 5:
-                string_feeling = "Confused";
+                mood = R.mipmap.confused;
                 break;
             case 6:
-                string_feeling = "Afraid";
+                mood = R.mipmap.afraid;
                 break;
             case 7:
-                string_feeling = "Love";
+                mood = R.mipmap.love;
+                break;
+            case 8:
+                mood = R.mipmap.sad;
                 break;
             default:
-                string_feeling = "Null";
+                mood = R.mipmap.sad;
         }
+
     }
 
-    public String getMood() {
-        return string_feeling;
+    public int getMood() {
+        return mood;
     }
 
     public String getEmail() { return email; }
