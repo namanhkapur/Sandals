@@ -111,6 +111,8 @@ public class GroupActivity extends AppCompatActivity {
                                     if (groupMeGroups.contains(groupName)) {
                                         Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
                                         startActivity(goToGroup);
+                                    } else {
+                                        // Go to created class
                                     }
 
                                 }
@@ -265,6 +267,8 @@ public class GroupActivity extends AppCompatActivity {
                 if (groupMeGroups.contains(groupName)) {
                     Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
                     startActivity(goToGroup);
+                } else {
+                    // Go to created class
                 }
 
             }
