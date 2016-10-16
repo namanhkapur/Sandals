@@ -30,8 +30,10 @@
             android:label="@string/title_activity_group"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".NewsFeed" />
+        <activity android:name=".NewsFeed"
+                  android:label="News Feed" />
         <activity android:name=".UserAreaActivity" />
+        <activity android:name=".CreatedGroup" />
         <activity android:name=".LoginNew"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
