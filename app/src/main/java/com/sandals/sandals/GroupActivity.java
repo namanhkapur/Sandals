@@ -1,6 +1,7 @@
 package com.sandals.sandals;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -56,6 +57,9 @@ public class GroupActivity extends AppCompatActivity {
 
     private ArrayList<String> list = new ArrayList<>();
 
+    HashSet<String> groupMeGroups = new HashSet<>();
+    HashSet<String> createdGroups = new HashSet<>();
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -82,23 +86,37 @@ public class GroupActivity extends AppCompatActivity {
 
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
                         // User clicked OK button
+
                         Group newGroup = new Group(editGroupName.getText().toString());
-                        allGroups.add(newGroup);
-                        list.add(0, newGroup.getName());
-                        ArrayAdapter adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_1, list);
-                        myGroups = (ListView) findViewById(R.id.myGroups);
-                        myGroups.setAdapter(adapter);
-                        myGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                            @Override
-                            public void onItemClick(AdapterView parent, View view, int position, long id) {
-                                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + "is selected",
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                        if (!groupMeGroups.contains(newGroup.getName()) && !createdGroups.contains(newGroup.getName())) {
+                            allGroups.add(newGroup);
+                            list.add(0, newGroup.getName());
+                            createdGroups.add(newGroup.getName());
 
-                        });
+                            ArrayAdapter adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_1, list);
+                            myGroups = (ListView) findViewById(R.id.myGroups);
+                            myGroups.setAdapter(adapter);
+                            myGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+                                @Override
+                                public void onItemClick(AdapterView parent, View view, int position, long id) {
+                                    String groupName = (String) parent.getItemAtPosition(position);
+                                    Toast.makeText(getBaseContext(),groupName + "is selected",
+                                            Toast.LENGTH_SHORT).show();
+
+                                    // Go to NewsFeed
+                                    if (groupMeGroups.contains(groupName)) {
+                                        Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
+                                        startActivity(goToGroup);
+                                    }
+
+                                }
+
+                            });
+                        }
                     }
                 });
 
@@ -206,7 +224,12 @@ public class GroupActivity extends AppCompatActivity {
 
         while (groups.hasNext()) {
             g = groups.next();
+
+            // If existing name exists, move on.
             addGroup = new Group((String) g.get("name"));
+            if (groupMeGroups.contains(addGroup.getName()) || createdGroups.contains(addGroup.getName())) {
+                continue;
+            }
             if (!g.get("image_url").equals(null)) {
                 addGroup.setImage((String) g.get("image_url"));
             }
@@ -223,6 +246,7 @@ public class GroupActivity extends AppCompatActivity {
                 addGroup.addMember(member);
             }
             allGroups.add(addGroup);
+            groupMeGroups.add(addGroup.getName());
             list.add((String) g.get("name"));
         }
         myGroups =  (ListView) findViewById(R.id.myGroups);
@@ -233,8 +257,16 @@ public class GroupActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + "is selected",
+                String groupName = (String) parent.getItemAtPosition(position);
+                Toast.makeText(getBaseContext(),groupName + "is selected",
                         Toast.LENGTH_SHORT).show();
+
+                // Go to NewsFeed
+                if (groupMeGroups.contains(groupName)) {
+                    Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
+                    startActivity(goToGroup);
+                }
+
             }
 
         });
