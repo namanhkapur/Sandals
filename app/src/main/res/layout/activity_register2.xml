@@ -8,20 +8,32 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sandals.sandals.RegisterActivity">
+    tools:context="com.sandals.sandals.RegisterActivity"
+    android:background="@drawable/beach3" >
+
+    <Button
+        android:text="Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonRegister"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editName"
-        android:hint="@string/prompt_name"
+        android:id="@+id/editPassword"
+        android:hint="@string/prompt_password"
         android:maxLines="1"
         android:layout_above="@+id/buttonRegister"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="158dp"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -36,7 +48,6 @@
         android:layout_above="@+id/editPhone"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -51,31 +62,18 @@
         android:layout_above="@+id/editPassword"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="13dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editPassword"
-        android:hint="@string/prompt_password"
+        android:id="@+id/editName"
+        android:hint="@string/prompt_name"
         android:maxLines="1"
-        android:layout_marginBottom="55dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:text="Register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonRegister"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/editEmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -88,10 +86,10 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
         android:gravity="center"
         android:layout_height="125dp"
+        android:layout_marginBottom="23dp"
         android:layout_above="@+id/editName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>
 
-//RANDOMCOMMENT
