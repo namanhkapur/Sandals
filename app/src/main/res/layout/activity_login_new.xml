@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sandals.sandals.LoginNew">
+    tools:context="com.sandals.sandals.LoginNew"
+    android:background="@drawable/beach3" >
 
     <EditText
         android:layout_width="wrap_content"
