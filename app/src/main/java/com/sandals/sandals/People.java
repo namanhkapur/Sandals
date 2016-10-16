@@ -77,7 +77,6 @@ public class People {
             status = message;
         } else
             status = "Error";
-        //merge
     }
 
     public String getStatus() {
