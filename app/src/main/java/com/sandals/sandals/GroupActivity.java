@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.ViewGroup;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -42,7 +43,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class GroupActivity extends AppCompatActivity {
 
     ListView myGroups;
     ArrayList<HashMap<String, Object>> groupsData;
-    HashSet<Group> allGroups = new HashSet<>();
+    ArrayList<Group> allGroups = new ArrayList<>();
     private EditText editGroupName;
     private boolean hasImported = false;
 
@@ -100,11 +101,11 @@ public class GroupActivity extends AppCompatActivity {
                         Group newGroup = new Group(editGroupName.getText().toString());
 
                         if (!groupMeGroups.containsKey(newGroup.getName()) && !createdGroups.containsKey(newGroup.getName())) {
-                            allGroups.add(newGroup);
+                            allGroups.add(0, newGroup);
                             list.add(0, newGroup.getName());
                             createdGroups.put(newGroup.getName(), newGroup);
 
-                            ArrayAdapter adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_1, list);
+                            ArrayAdapter adapter = new MyListAdapter();
                             myGroups = (ListView) findViewById(R.id.myGroups);
                             myGroups.setAdapter(adapter);
                             myGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -112,14 +113,14 @@ public class GroupActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView parent, View view, int position, long id) {
                                     String groupName = (String) parent.getItemAtPosition(position);
-                                    Toast.makeText(getBaseContext(),groupName + "is selected",
+                                    Toast.makeText(getBaseContext(),groupName + " is selected",
                                             Toast.LENGTH_SHORT).show();
 
                                     // Go to NewsFeed
                                     if (groupMeGroups.containsKey(groupName)) {
                                         Intent goToGroup = new Intent(GroupActivity.this, NewsFeed.class);
                                         startActivity(goToGroup);
-                                    } else {
+                                    } else if (createdGroups.containsKey(groupName)){
                                         // Go to created class
                                         Intent goToGroup = new Intent(GroupActivity.this, CreatedGroup.class);
                                         goToGroup.putExtra("group", groupName);
@@ -240,7 +241,8 @@ public class GroupActivity extends AppCompatActivity {
 
             // If existing name exists, move on.
             addGroup = new Group((String) g.get("name"));
-            if (groupMeGroups.containsKey(addGroup.getName()) || createdGroups.containsKey(addGroup.getName())) {
+            if (groupMeGroups.containsKey(addGroup.getName()) || createdGroups.containsKey(addGroup.getName())
+                    || addGroup.getName().equals("")) {
                 continue;
             }
             if (!g.get("image_url").equals(null)) {
@@ -263,7 +265,8 @@ public class GroupActivity extends AppCompatActivity {
             list.add((String) g.get("name"));
         }
         myGroups =  (ListView) findViewById(R.id.myGroups);
-        ArrayAdapter adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_1, list);
+        ArrayAdapter adapter = new MyListAdapter();
+//        ArrayAdapter adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_1, list);
         myGroups.setAdapter(adapter);
 
         myGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -271,7 +274,7 @@ public class GroupActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 String groupName = (String) parent.getItemAtPosition(position);
-                Toast.makeText(getBaseContext(),groupName + "is selected",
+                Toast.makeText(getBaseContext(),groupName + " is selected",
                         Toast.LENGTH_SHORT).show();
 
                 // Go to NewsFeed
@@ -290,6 +293,32 @@ public class GroupActivity extends AppCompatActivity {
         });
     }
 
+    private class MyListAdapter extends ArrayAdapter<Group> {
+        public MyListAdapter() {
+            super(GroupActivity.this, R.layout.group_adapter, allGroups);
+        }
+
+        @Override
+        public View getView(int position, View currentView, ViewGroup parent) {
+            View itemView = currentView;
+            if (itemView == null) {
+                itemView = getLayoutInflater().inflate(R.layout.group_adapter, parent, false);
+            }
+
+            // Get group
+            Group group = allGroups.get(position);
+
+            // View
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView2);
+            imageView.setImageResource(R.mipmap.ic_launcher);
+
+            // Name
+            TextView groupName = (TextView) itemView.findViewById(R.id.textView5);
+            groupName.setText(group.getName());
+
+            return itemView;
+        }
+    }
 
     private static String convertStreamToString(InputStream inputStream) throws IOException {
         if (inputStream != null) {
