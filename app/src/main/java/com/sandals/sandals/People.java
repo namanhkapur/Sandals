@@ -13,12 +13,14 @@ public class People {
     public int userID;
     public String iconID;
     public String email;
+    public long phoneNumber;
 
     public People(String name) {
         this.name = name;
         this.mood = 9;
         this.status = "";
         this.iconID = "";
+        this.phoneNumber = 0;
     }
 
     public void setFeeling(int f) { feeling = f; }
@@ -115,4 +117,10 @@ public class People {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
+
+    public void setPhoneNumber(long num){
+        phoneNumber = num;
+    }
+
+    public long getPhoneNumber(){return phoneNumber;}
 }
