@@ -23,11 +23,18 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 public class NewsFeed extends AppCompatActivity {
 
+    HashSet<Integer> existingUsers = new HashSet<>();
+    HashSet<Integer> existingNames = new HashSet<>();
+    HashSet<Integer> existingStatuses = new HashSet<>();
+    HashSet<Integer> existingPics = new HashSet<>();
     private List<People> users = new ArrayList<>();
+    private List<String> names = new ArrayList<>();
+    private List<String> statuses = new ArrayList<>();
     private EditText editStatus;
     private Spinner spinner;
     private ArrayAdapter<People> adapter;
@@ -38,8 +45,45 @@ public class NewsFeed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_feed);
 
+        populateLists();
         populateUsers();
         populateListView();
+    }
+
+    public void populateLists() {
+        names.add("Landry Jackson");
+        names.add("Finley Nguyen");
+        names.add("Jamie Park");
+        names.add("Sam Kenner");
+        names.add("Cameran Payton");
+        names.add("Kendall Smith");
+        names.add("Riley Chen");
+        names.add("Jordan Needham");
+        names.add("Morgan Ali");
+        names.add("Remy Davidson");
+        names.add("Alex Parker");
+        names.add("Sammy Park");
+
+        statuses.add("I am feeling troubled");
+        statuses.add("It's 4AM!");
+        statuses.add("That midterm though");
+        statuses.add("Not feeling great today");
+        statuses.add("What a great day!");
+        statuses.add("Airplanes are cool");
+        statuses.add("Don't bother me!");
+        statuses.add("Anyone down for dinner?");
+        statuses.add("Please help");
+        statuses.add("So much homework...");
+        statuses.add("Go Mavs!!!");
+        statuses.add("Can't believe this!!");
+        statuses.add("Anyone feelling lonely?");
+        statuses.add("Ten days - no drinks!");
+        statuses.add("That party was lit");
+
+    }
+
+    public int random(int num) {
+        return (int) (Math.round(Math.random() * num));
     }
 
     public void addUser(People person) {
@@ -47,42 +91,74 @@ public class NewsFeed extends AppCompatActivity {
     }
 
     private void populateUsers() {
+
         People Namanh = new People("Namanh Kapur");
-        People Kevin = new People("Kevin Lin");
-        People Casey = new People("Casey Takeda");
-        People Hasnain = new People("Hasnain Ali");
-        People Anthony = new People("Anthony Cho");
-
         Namanh.setUserID(R.mipmap.namanh);
-        Namanh.setStatus("Check out my new app, Sandals!", 100);
-        Namanh.setMood(5);
+        Namanh.setStatus("Check out my new app, Sandal!", 50);
+        Namanh.setMood(4);
         Namanh.setPhoneNumber(Long.parseLong("8322770363"));
-
-        Kevin.setUserID(R.mipmap.kevin);
-        Kevin.setStatus("I need more caffeine...", 100);
-        Kevin.setMood(1);
-        Kevin.setPhoneNumber(Long.parseLong("7143264413"));
-
-        Casey.setUserID(R.mipmap.casey);
-        Casey.setStatus("Airplanes", 100);
-        Casey.setMood(5);
-        Casey.setPhoneNumber(Long.parseLong("5623166537"));
-
-        Hasnain.setUserID(R.mipmap.hasnain);
-        Hasnain.setStatus("Made another half court shot!", 100);
-        Hasnain.setMood(6);
-        Hasnain.setPhoneNumber(Long.parseLong("8323824287"));
-
-        Anthony.setUserID(R.mipmap.anthony);
-        Anthony.setStatus("I'm really good looking", 100);
-        Anthony.setMood(4);
-        Anthony.setPhoneNumber(Long.parseLong("7138288185"));
-
         addUser(Namanh);
-        addUser(Kevin);
-        addUser(Casey);
-        addUser(Hasnain);
-        addUser(Anthony);
+
+        for (int i = 0; i < 7; i++) {
+
+            int randName = random(names.size() - 1);
+            while (existingNames.contains(randName)) {
+                randName = random(names.size() - 1);
+            }
+            existingNames.add(randName);
+            People person = new People(names.get(randName));
+
+            int randStatus = random(statuses.size() - 1);
+            while (existingStatuses.contains(randStatus)) {
+                randStatus = random(statuses.size() - 1);
+            }
+            existingStatuses.add(randStatus);
+            person.setStatus(statuses.get(randStatus), 50);
+
+            int randPic = random(10);
+            while (existingPics.contains(randStatus)) {
+                randStatus = random(10);
+            }
+
+            int imgPath = 0;
+
+            switch (randPic) {
+                case 0:
+                    imgPath = R.mipmap.p0;
+                    break;
+                case 1:
+                    imgPath = R.mipmap.p1;
+                    break;
+                case 2:
+                    imgPath = R.mipmap.p2;
+                    break;
+                case 3:
+                    imgPath = R.mipmap.p3;
+                    break;
+                case 4:
+                    imgPath = R.mipmap.p4;
+                    break;
+                case 5:
+                    imgPath = R.mipmap.p5;
+                    break;
+                case 6:
+                    imgPath = R.mipmap.p6;
+                    break;
+                case 7:
+                    imgPath = R.mipmap.p7;
+                    break;
+                case 8:
+                    imgPath = R.mipmap.p8;
+                    break;
+                default:
+                    imgPath = R.mipmap.p9;
+            }
+
+            person.setMood(random(9));
+            person.setPhoneNumber(Long.parseLong("8322770363"));
+            addUser(person);
+
+        }
     }
 
     public void populateListView() {
@@ -110,7 +186,7 @@ public class NewsFeed extends AppCompatActivity {
                     list.add("Confused");
                     list.add("Afraid");
                     list.add("Love");
-                    list.add("Sad");
+                    list.add("S2ad");
 
 
                     dataAdapter = new ArrayAdapter<String>(NewsFeed.this, android.R.layout.simple_spinner_item, list);
@@ -130,8 +206,8 @@ public class NewsFeed extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             users.get(0).setStatus(editStatus.getText().toString(), 100);
                             users.get(0).setMood(spinner.getSelectedItemPosition());
-                            dataAdapter.notifyDataSetChanged();
-                            adapter.notifyDataSetChanged();
+                            //dataAdapter.notifyDataSetChanged();
+                            // adapter.notifyDataSetChanged();
                         }
                     });
 
@@ -171,7 +247,18 @@ public class NewsFeed extends AppCompatActivity {
             }
 
             // find people to work with
-            People currentPerson = users.get(position);
+            int randPerson = random(users.size() - 1);
+            People currentPerson;
+
+            if (users.get(position).getName().equals("Namanh Kapur")) {
+                currentPerson = users.get(0);
+            } else {
+                while (existingUsers.contains(randPerson)) {
+                    randPerson = random(users.size() - 1);
+                }
+                existingUsers.add(randPerson);
+                currentPerson = users.get(randPerson);
+            }
 
             // fill the view
             ImageView imageView = (ImageView)itemView.findViewById(R.id.p1_icon);
