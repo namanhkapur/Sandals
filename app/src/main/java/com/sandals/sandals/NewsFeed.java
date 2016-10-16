@@ -104,10 +104,10 @@ public class NewsFeed extends AppCompatActivity {
             personStatus.setText(currentPerson.getStatus());
 
             // time stamp with date
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm MM/dd/yyyy");
             String format = simpleDateFormat.format(new Date());
             TextView personTimeStamp = (TextView)itemView.findViewById(R.id.p1_statustime);
-            personTimeStamp.setText("Date : "+ format);
+            personTimeStamp.setText(format);
 
             return itemView;
         }
